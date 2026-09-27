@@ -1,0 +1,41 @@
+topics:
+
+  retail_sales:
+    queries:
+      - "retail sales"
+      - "US retail sales"
+
+  consumer_spending:
+    queries:
+      - "consumer spending"
+      - "US consumer spending"
+      - "household spending"
+
+  inflation:
+    queries:
+      - "US inflation"
+      - "consumer prices"
+      - "cost of living"
+
+  food_prices:
+    queries:
+      - "food prices"
+      - "grocery prices"
+      - "supermarket prices"
+
+  employment:
+    queries:
+      - "US unemployment"
+      - "US jobs"
+      - "employment"
+
+  walmart:
+    queries:
+      - "Walmart"
+      - "Wal-Mart"
+
+  shopping_events:
+    queries:
+      - "Black Friday"
+      - "holiday shopping"
+      - "Christmas shopping"

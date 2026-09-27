@@ -1,0 +1,74 @@
+project:
+  name: retail-sales-lakehouse
+  market: United States
+  core_period:
+    start: '2011-01-29'
+    end: '2016-06-19'
+
+sources:
+  m5:
+    enabled: true
+    role: core_retail
+    type: structured_csv
+    provider: Kaggle - M5 Forecasting Accuracy
+    grain: date_store_item
+    auth: kaggle_credentials
+    target_dir: data/raw/m5
+
+  fred:
+    enabled: true
+    role: macroeconomic
+    type: rest_json
+    provider: Federal Reserve Bank of St. Louis
+    auth: FRED_API_KEY
+    target_dir: data/raw/fred
+    series:
+      CPIAUCSL: cpi_all_urban_consumers
+      UNRATE: unemployment_rate
+      RSAFS: retail_and_food_services_sales
+      UMCSENT: consumer_sentiment
+
+  census:
+    enabled: true
+    role: retail_market_benchmark
+    type: rest_json
+    provider: U.S. Census Bureau
+    auth: none_for_basic_use
+    target_dir: data/raw/census
+
+  noaa:
+    enabled: true
+    role: weather
+    type: rest_json
+    provider: NOAA Climate Data Online
+    auth: NOAA_TOKEN
+    target_dir: data/raw/noaa
+    states:
+      - CA
+      - TX
+      - WI
+
+  gdelt:
+    enabled: true
+    role: news_market_intelligence
+    type: rest_json_or_bulk
+    provider: GDELT Project
+    auth: none
+    target_dir: data/raw/gdelt
+    start_date: '2015-02-01'
+    end_date: '2016-06-19'
+    queries:
+      - walmart
+      - retail
+      - consumer spending
+      - food prices
+      - inflation
+
+  x:
+    enabled: false
+    role: optional_social_sentiment
+    type: rest_json
+    provider: X API
+    auth: X_BEARER_TOKEN
+    target_dir: data/raw/x
+    note: Optional because historical full-archive access may be paid/restricted.

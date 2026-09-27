@@ -1,0 +1,31 @@
+canonical_grain: date_store_item
+
+joins:
+  price:
+    source: m5.sell_prices
+    keys: [store_id, item_id, wm_yr_wk]
+
+  calendar:
+    source: m5.calendar
+    keys: [d]
+
+  macro:
+    source: fred
+    transform: map_each_daily_record_to_year_month
+    keys: [year_month]
+
+  census_retail:
+    source: census_mrts
+    transform: map_each_daily_record_to_year_month
+    keys: [year_month]
+
+  weather:
+    source: noaa
+    transform: aggregate_station_weather_to_state_day
+    keys: [date, state_id]
+
+  gdelt:
+    source: gdelt
+    transform: aggregate_articles_to_daily_market_signal
+    keys: [date]
+    valid_overlap: '2015-02-01/2016-06-19'
